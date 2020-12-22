@@ -26,8 +26,7 @@ public class PlayFairCipher {
             i++;
         }
         
-        System.out.println(bigramicBlock);
-        System.out.println(bigramicBlock.get(0));
+        String alphabet = "abcdefghijlmnopqrstuvwxyz";
     }
     
 }
