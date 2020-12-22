@@ -27,6 +27,7 @@ public class PlayFairCipher {
         }
         
         String alphabet = "abcdefghijlmnopqrstuvwxyz";
+        String key = "grito";
     }
     
 }
