@@ -8,8 +8,9 @@ import java.util.Scanner;
 public class PlayFairCipher {
 
     public static void main(String[] args) {
-        String plainText = "marcelo";
-        System.out.println("Typed plain text: " + plainText);
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Type a word: ");
+        String plainText = scan.nextLine().toLowerCase();
         List<String> bigramicBlock = new ArrayList<>();
         if (plainText.length() % 2 != 0) {
             plainText += 'x';
@@ -29,7 +30,8 @@ public class PlayFairCipher {
         }
 
         String alphabet = "abcdefghijlmnopqrstuvwxyz";
-        String key = "grito";
+        System.out.print("Type a key: ");
+        String key = scan.nextLine().toLowerCase();
         int alphabetSize = alphabet.length();
         int keySize = key.length();
         List firstLine = new ArrayList<>();
