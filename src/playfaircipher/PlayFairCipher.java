@@ -14,11 +14,13 @@ public class PlayFairCipher {
         if (plainText.length() % 2 != 0) {
             plainText += 'x';
         }
+        String repeatedLetter = "";
         for (int i = 0; i < plainText.length();) {
             String first = String.valueOf(plainText.charAt(i));
             i++;
             String second = String.valueOf(plainText.charAt(i));
             if (first.equals(second)) {
+                repeatedLetter += first;
                 first = "";
                 first += 'z';
             }
@@ -185,7 +187,11 @@ public class PlayFairCipher {
         
         String decryptedPlainText = "";
         for (int i = 0; i < encryptedText.size(); i++) {
-            decryptedPlainText += decryptedText.get(i);
+            String text = String.valueOf(decryptedText.get(i));
+            if (text.equals("z")) {
+                text = repeatedLetter;
+            }
+            decryptedPlainText += text;
         }
         System.out.println("Decrypted plaint text: " + decryptedPlainText);
     }
