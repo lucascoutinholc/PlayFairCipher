@@ -3,11 +3,13 @@ package playfaircipher;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class PlayFairCipher {
 
     public static void main(String[] args) {
-        String plainText = "lucas";
+        String plainText = "baseball";
+        System.out.println("Typed plain text: " + plainText);
         List<String> bigramicBlock = new ArrayList<>();
         if (plainText.length() % 2 != 0) {
             plainText += 'x';
@@ -111,6 +113,81 @@ public class PlayFairCipher {
             encryptedPlainText += encryptedText.get(i);
         }
         System.out.println("Encrypted plaint text: " + encryptedPlainText);
+        
+        List<String> bigramicBlockEncrypted = new ArrayList();
+        for (int i = 0; i < encryptedPlainText.length();) {
+            String firstLetter = String.valueOf(encryptedPlainText.charAt(i));
+            i++;
+            String secondLetter = String.valueOf(encryptedPlainText.charAt(i));
+            bigramicBlockEncrypted.add(firstLetter + secondLetter);
+            i++;
+        }
+        
+        List decryptedText = new ArrayList();
+        for (int i = 0; i < bigramicBlock.size(); i++) {
+            int a = 0, b = 0, c = 0, d = 0;
+            for (int j = 0; j < 2; j++) {
+                if (j == 0) {
+                    for (int k = 0; k < 5; k++) {
+                        for (int l = 0; l < 5; l++) {
+                            if (cipherAlphabetMatrix[k][l] == bigramicBlockEncrypted.get(i).charAt(j)) {
+                                a = k;
+                                b = l;
+                            }
+                        }
+                    }
+                }
+                if (j == 1) {
+                    for (int k = 0; k < 5; k++) {
+                        for (int l = 0; l < 5; l++) {
+                            if (cipherAlphabetMatrix[k][l] == bigramicBlockEncrypted.get(i).charAt(j)) {
+                                c = k;
+                                d = l;
+                                
+                                if (a != c && b != d) {
+                                    decryptedText.add(cipherAlphabetMatrix[a][d]);
+                                    decryptedText.add(cipherAlphabetMatrix[c][b]);
+                                }
+                                if (a == c) {
+                                    if (b == 0) {
+                                        b = 4;
+                                        decryptedText.add(cipherAlphabetMatrix[a][b]);
+                                        decryptedText.add(cipherAlphabetMatrix[c][d-1]);
+                                    } else if (d == 0) {
+                                        d = 4;
+                                        decryptedText.add(cipherAlphabetMatrix[a][b-1]);
+                                        decryptedText.add(cipherAlphabetMatrix[c][d]);
+                                    } else {
+                                        decryptedText.add(cipherAlphabetMatrix[a][b-1]);
+                                        decryptedText.add(cipherAlphabetMatrix[c][d-1]);
+                                    }
+                                }
+                                if (b == d) {
+                                    if (a == 0) {
+                                        a = 4;
+                                        decryptedText.add(cipherAlphabetMatrix[a][b]);
+                                        decryptedText.add(cipherAlphabetMatrix[c-1][d]);
+                                    } else if (c == 0) {
+                                        c = 4;
+                                        decryptedText.add(cipherAlphabetMatrix[a-1][b]);
+                                        decryptedText.add(cipherAlphabetMatrix[c][d]);
+                                    } else {
+                                        decryptedText.add(cipherAlphabetMatrix[a-1][b]);
+                                        decryptedText.add(cipherAlphabetMatrix[c-1][d]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        String decryptedPlainText = "";
+        for (int i = 0; i < encryptedText.size(); i++) {
+            decryptedPlainText += decryptedText.get(i);
+        }
+        System.out.println("Decrypted plaint text: " + decryptedPlainText);
     }
 
 }
