@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class PlayFairCipher {
 
     public static void main(String[] args) {
-        String plainText = "baseball";
+        String plainText = "marcelo";
         System.out.println("Typed plain text: " + plainText);
         List<String> bigramicBlock = new ArrayList<>();
         if (plainText.length() % 2 != 0) {
@@ -192,6 +192,9 @@ public class PlayFairCipher {
                 text = repeatedLetter;
             }
             decryptedPlainText += text;
+        }
+        if (decryptedPlainText.endsWith("x")) {
+            decryptedPlainText = decryptedPlainText.replace("x", "");
         }
         System.out.println("Decrypted plaint text: " + decryptedPlainText);
     }
