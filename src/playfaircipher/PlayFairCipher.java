@@ -7,7 +7,7 @@ import java.util.List;
 public class PlayFairCipher {
 
     public static void main(String[] args) {
-        String plainText = "passaro";
+        String plainText = "lucas";
         List<String> bigramicBlock = new ArrayList<>();
         if (plainText.length() % 2 != 0) {
             plainText += 'x';
@@ -45,12 +45,6 @@ public class PlayFairCipher {
                 aux++;
             }
         }
-//        for (int i = 0; i < 5; i++) { //print
-//            for (int j = 0; j < 5; j++) {
-//                System.out.print(cipherAlphabetMatrix[i][j]);
-//            }
-//            System.out.println("");
-//        }
         
         List encryptedText = new ArrayList();
         for (int i = 0; i < bigramicBlock.size(); i++) {
